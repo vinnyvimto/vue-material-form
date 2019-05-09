@@ -1,24 +1,53 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex sm12 md8>
+            <v-card>
+              <v-toolbar flat card dense>
+                <v-toolbar-title></v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <ServiceList @continued="showJson" />
+              </v-card-text>
+            </v-card>
+
+            <pre v-if="json" v-text="json"></pre>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import ServiceList from "./components/ServiceList.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld,
+    ServiceList
   },
+
+  data() {
+    return {
+      checkbox: false,
+      json: null
+    };
+  },
+
+  methods: {
+    showJson(forms) {
+      this.json = JSON.stringify(forms, null, 2);
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
